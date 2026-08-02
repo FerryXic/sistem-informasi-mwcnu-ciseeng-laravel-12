@@ -47,8 +47,8 @@
 
 
 
-<header id="mainHeader" class="hidden md:flex sticky top-0 z-50 transition-all duration-300
-  {{ $isDashboard ? 'bg-transparent backdrop-blur-sm text-white' : 'bg-white shadow-md text-green-900' }}">
+<header id="mainHeader" class="hidden md:flex top-0 z-50 transition-all duration-300
+  {{ $isDashboard ? 'fixed w-full left-0 bg-transparent text-white' : 'sticky bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 text-green-900' }}">
   
   <div class="max-w-7xl mx-auto w-full flex items-center justify-between px-6 lg:px-10 py-4">
     
@@ -70,7 +70,7 @@
             {{ $menu }} <i class="fas fa-chevron-down text-xs mt-[1px] transition-transform duration-300"></i>
           </button>
           <div
-            class="dropdown-menu hidden absolute bg-white text-green-900 rounded-lg shadow-md ring-1 ring-green-200 py-2 w-56 mt-3 animate-fade-in-down z-40">
+            class="dropdown-menu hidden absolute bg-white/95 backdrop-blur-lg text-green-900 rounded-xl shadow-lg ring-1 ring-black/5 py-2 w-56 mt-3 animate-fade-in-down z-40">
             @foreach ($items as $label => $url)
               <a href="{{ $url }}" class="flex justify-between items-center px-4 py-2 hover:bg-yellow-100 transition">
                 {{ $label }}
@@ -150,11 +150,11 @@
   window.addEventListener('scroll', () => {
     if (!isDashboard) return;
     if (window.scrollY === 0) {
-      header.classList.remove('bg-white', 'shadow-md', 'text-green-900');
-      header.classList.add('bg-transparent', 'backdrop-blur-sm', 'text-white');
+      header.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-gray-100', 'text-green-900');
+      header.classList.add('bg-transparent', 'text-white');
     } else {
-      header.classList.remove('bg-transparent', 'backdrop-blur-sm', 'text-white');
-      header.classList.add('bg-white', 'shadow-md', 'text-green-900');
+      header.classList.remove('bg-transparent', 'text-white');
+      header.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-gray-100', 'text-green-900');
     }
   });
 

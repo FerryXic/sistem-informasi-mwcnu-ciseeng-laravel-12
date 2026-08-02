@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('gambar'); 
             $table->string('pdf')->nullable();
-            $table->timestamp('start_year');
-            $table->timestamp('end_year');
+            $table->timestamp('start_year')->nullable();
+            $table->timestamp('end_year')->nullable();
             $table->timestamps();
         });
     }

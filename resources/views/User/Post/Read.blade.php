@@ -30,8 +30,8 @@
 
           <!-- Gambar -->
           @if($post->image)
-          <div class="mb-8 rounded-lg overflow-hidden shadow-lg">
-            <img src="{{ asset('storage/posts/' . $post->image) }}" alt="{{ $post->title }}" class="w-full h-auto object-cover">
+          <div class="mb-8 rounded-lg overflow-hidden shadow-sm border border-slate-100 bg-slate-50 flex items-center justify-center min-h-[200px]">
+            <img src="{{ asset('storage/posts/' . $post->image) }}" alt="{{ $post->title }}" class="w-full h-auto object-cover" onerror="this.outerHTML='<div class=\'w-full py-24 bg-slate-100 flex flex-col items-center justify-center text-slate-400\'><i class=\'fas fa-image text-5xl mb-4\'></i><span class=\'font-medium\'>Media tidak tersedia</span></div>'">
           </div>
           @endif
 
@@ -68,12 +68,19 @@
             </h3>
 
             @forelse($relatedPosts as $related)
-            <a href="{{ route('Index.Post', ['title' => $related->title]) }}" class="block mb-4">
+            <a href="{{ route('Show.Post', $related->title) }}" class="block mb-4 group">
               <div class="flex items-center gap-3 hover:bg-green-50 p-2 rounded transition">
-                <img src="{{ $related->image ? asset('assets/img/posts/' . $related->image) : 'https://via.placeholder.com/80' }}"
-                     alt="{{ $related->title }}" class="w-14 h-14 object-cover rounded border">
+                <div class="w-14 h-14 flex-shrink-0 bg-slate-100 rounded border flex items-center justify-center overflow-hidden">
+                  @if($related->image)
+                  <img src="{{ asset('storage/posts/' . $related->image) }}"
+                       alt="{{ $related->title }}" class="w-full h-full object-cover"
+                       onerror="this.outerHTML='<i class=\'fas fa-image text-xl text-slate-400\'></i>'">
+                  @else
+                  <i class="fas fa-image text-xl text-slate-400"></i>
+                  @endif
+                </div>
                 <div class="text-sm text-gray-700">
-                  <p class="font-medium leading-snug">{{ Str::limit($related->title, 50) }}</p>
+                  <p class="font-medium leading-snug group-hover:text-green-700 transition">{{ Str::limit($related->title, 50) }}</p>
                   <small class="text-gray-500"><i class="far fa-clock mr-1"></i>{{ $related->created_at->format('d M Y') }}</small>
                 </div>
               </div>

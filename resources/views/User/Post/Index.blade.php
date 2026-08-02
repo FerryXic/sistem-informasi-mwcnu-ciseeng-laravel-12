@@ -28,13 +28,18 @@
         <a href="{{ route('Show.Post', $post->title) }}">
           <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300 group">
             <!-- Gambar -->
-            <div class="h-48 overflow-hidden">
-              <img src="{{ $post->image 
-    ? asset('storage/posts/' . $post->image) 
-    : 'https://via.placeholder.com/600x300?text=No+Image' }}"
-    alt="{{ $post->title }}"
-    class="w-full h-full object-cover transform group-hover:scale-105 transition duration-300">
-
+            <div class="h-48 overflow-hidden bg-slate-100 flex items-center justify-center relative">
+              @if($post->image)
+              <img src="{{ asset('storage/posts/' . $post->image) }}"
+                   alt="{{ $post->title }}"
+                   class="w-full h-full object-cover transform group-hover:scale-105 transition duration-300"
+                   onerror="this.outerHTML='<div class=\'w-full h-full bg-slate-100 flex flex-col items-center justify-center text-slate-400\'><i class=\'fas fa-image text-3xl mb-2\'></i><span class=\'text-xs font-medium\'>Media tidak tersedia</span></div>'">
+              @else
+              <div class="w-full h-full bg-slate-100 flex flex-col items-center justify-center text-slate-400">
+                <i class="fas fa-image text-3xl mb-2"></i>
+                <span class="text-xs font-medium">Media tidak tersedia</span>
+              </div>
+              @endif
             </div>
 
             <!-- Konten -->
@@ -49,9 +54,10 @@
               <!-- Meta Info -->
               <div class="flex items-center justify-between text-xs text-gray-500 mt-3">
                 <div class="flex items-center gap-2">
-                  <img src="https://unusia.ac.id/assets/frontend/images/user.png" alt="Author"
-                    class="w-5 h-5 rounded-full">
-                  <span>{{ $post->user->name ?? 'Unknown' }}</span>
+                  <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-bold">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <span class="font-medium text-gray-700">{{ $post->user->name ?? 'Unknown' }}</span>
                 </div>
                 <span><i class="far fa-clock mr-1"></i>{{ $post->created_at->format('d M Y') }}</span>
               </div>

@@ -56,8 +56,8 @@
 @endphp
 
 <header id="mainHeaderMobile"
-  class="md:hidden sticky top-0 z-50 transition-all duration-300
-  {{ $isDashboard ? 'bg-transparent backdrop-blur-sm text-white' : 'bg-white shadow-md text-green-900' }}">
+  class="md:hidden top-0 z-50 transition-all duration-300
+  {{ $isDashboard ? 'fixed w-full left-0 bg-transparent text-white' : 'sticky bg-white shadow-md text-green-900' }}">
 
   <div class="flex justify-between items-center px-4 py-3">
     <a href="{{ route('Index.Dashboard') }}" class="flex items-center gap-3">
